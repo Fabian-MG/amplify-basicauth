@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Nav from "./components/nav";
+import { Switch } from "antd";
+import Public from "./components/public";
+import Protected from "./components/protected";
+import Profile from "./components/profile";
 
 function App() {
+  const [current, setCurrent] = useState("home");
+
+  useEffect(() => {}, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Public} />
+          <Route exact path="/protected" component={Protected} />
+          <Route exact path="/profile" component={Profile} />
+          <Route component={Public} />
+        </Switch>
+      </Router>
     </div>
   );
 }
