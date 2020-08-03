@@ -1,22 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Auth } from "aws-amplify";
+import React from "react";
 import Container from "./container";
+import protectedRoute from "../protectedRoute.hook";
 
 const Protected = ({ history }) => {
-  const [auth, setAuth] = useState(false);
-
-  useEffect(() => {
-    Auth.currentAuthenticatedUser().catch(() => {
-      history.push("/profile");
-    });
-    setAuth(true);
-  }, []);
-
-  return auth ? (
+  return (
     <Container>
       <h1>Protected Route</h1>
     </Container>
-  ) : null;
+  );
 };
 
-export default Protected;
+export default protectedRoute(Protected);
